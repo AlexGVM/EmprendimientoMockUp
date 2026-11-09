@@ -135,9 +135,9 @@ const screens = {
       <div class="field"><span class="lbl">Género</span>${chips("genero",["Mujer","Hombre","Prefiero no decir"],S.genero)}</div>
       <div class="field"><span class="lbl">Tipo de negocio</span>${chips("negocio",["Tienda","Comida","Ropa","Servicios","Otro"],S.negocio)}</div>
       <div class="field"><span class="lbl">Tiempo con tu negocio</span>${chips("tiempo",["Menos de 1 año","1 a 3 años","3 a 5 años","Más de 5 años"],S.tiempo)}</div>
-      <div class="field"><label for="ingresos">Ingresos anuales aproximados</label>
-        <div class="money"><span>$</span><input id="ingresos" type="number" inputmode="numeric" min="0" value="${esc(S.ingresos)}" placeholder="6000"></div>
-        <span class="hint">Lo que vende tu negocio en un año, más o menos</span></div>
+      <div class="field"><label for="ingresos">Ingresos mensuales aproximados</label>
+        <div class="money"><span>$</span><input id="ingresos" type="number" inputmode="numeric" min="0" value="${esc(S.ingresos)}" placeholder="500"></div>
+        <span class="hint">Lo que vende tu negocio en un mes, más o menos</span></div>
       <div class="field"><label for="objetivo">🎯 ¿Cuánto dinero quieres conseguir?</label>
         <div class="money"><span>$</span><input id="objetivo" type="number" inputmode="numeric" min="50" value="${esc(S.objetivo)}" placeholder="500"></div>
         <span class="hint">Desde $50 hasta $5,000</span></div>
@@ -222,7 +222,7 @@ function bind(name){
     if(!S.genero) return showErr("Elige una opción de género.");
     if(!S.negocio) return showErr("Elige el tipo de negocio.");
     if(!S.tiempo) return showErr("Cuéntanos cuánto tiempo tienes con tu negocio.");
-    if(!(+S.ingresos>0)) return showErr("Escribe tus ingresos anuales aproximados.");
+    if(!(+S.ingresos>0)) return showErr("Escribe tus ingresos mensuales aproximados.");
     if(!(+S.objetivo>=50)) return showErr("El objetivo debe ser de al menos $50.");
     if(!S.tiene) return showErr("Cuéntanos si tienes préstamos actualmente.");
     S.monto=""; go("solicitud");

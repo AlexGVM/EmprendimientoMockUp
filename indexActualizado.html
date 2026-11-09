@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kreciva Mockup</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one phone-width column, one screen visible at a time, sticky action at the bottom */
+:root{
+  --bg:#EEF4F1; --surface:#FFFFFF; --ink:#12302A; --muted:#5A716B; --line:#D3E0DB;
+  --brand:#0F6B57; --brand-ink:#FFFFFF; --sun:#F2B632; --sun-ink:#3A2A00; --soft:#E1EEE9; --ok:#1B8A5A; --warn:#B3261E;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1A17; --surface:#122622; --ink:#E4F1EC; --muted:#93ADA6; --line:#25403A;
+  --brand:#3FBF9C; --brand-ink:#06201A; --sun:#F2B632; --sun-ink:#2A1E00; --soft:#183430; --ok:#4FD39A; --warn:#FF8A80; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0B1A17; --surface:#122622; --ink:#E4F1EC; --muted:#93ADA6; --line:#25403A;
+  --brand:#3FBF9C; --brand-ink:#06201A; --sun:#F2B632; --sun-ink:#2A1E00; --soft:#183430; --ok:#4FD39A; --warn:#FF8A80; color-scheme:dark }
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.app{max-width:420px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding-block:16px 24px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em}
+.mark{width:28px;height:28px;border-radius:8px;background:var(--brand);display:grid;place-items:center}
+.demo{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 8px}
+.back{background:none;border:0;color:var(--brand);font:600 15px var(--body);padding:8px 0;cursor:pointer}
+.steps{display:flex;gap:6px;margin:14px 0 4px}
+.steps i{flex:1;height:4px;border-radius:4px;background:var(--line)}
+.steps i.on{background:var(--brand)}
+.screen{flex:1;display:flex;flex-direction:column;gap:18px;padding-top:10px;animation:in .25s ease}
+@keyframes in{from{transform:translateY(6px);opacity:.6}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.screen{animation:none}}
+h1,h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1{font-size:40px;line-height:1.02}
+h2{font-size:28px;line-height:1.1}
+p{margin:0}
+.lead{color:var(--muted);font-size:17px}
+.field{display:flex;flex-direction:column;gap:6px}
+label,.lbl{font-weight:600;font-size:14px}
+.hint{font-size:13px;color:var(--muted)}
+input{width:100%;font:500 17px var(--body);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px}
+input:focus,button:focus-visible{outline:3px solid var(--sun);outline-offset:1px;border-color:var(--brand)}
+.money{position:relative}
+.money span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--muted)}
+.money input{padding-left:30px;font-variant-numeric:tabular-nums;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:9px 14px;font:600 14px var(--body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg .chip{border-radius:12px;padding:12px 6px;text-align:center}
+.sub{display:flex;flex-direction:column;gap:14px;padding:14px;border-radius:14px;background:var(--soft)}
+.err{color:var(--warn);font-size:13px;font-weight:600}
+.cta{position:sticky;bottom:0;padding-top:12px;padding-bottom:env(safe-area-inset-bottom,0px);background:linear-gradient(to top,var(--bg) 70%,transparent);margin-top:auto}
+.btn{width:100%;border:0;border-radius:14px;padding:16px;font:700 17px var(--body);cursor:pointer;background:var(--brand);color:var(--brand-ink)}
+.btn.sun{background:var(--sun);color:var(--sun-ink)}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.est{display:flex;justify-content:space-between;align-items:baseline;padding:14px;border-radius:14px;border:1.5px dashed var(--line)}
+.est b{font-family:var(--display);font-size:24px;font-variant-numeric:tabular-nums}
+.hero{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.stall{display:flex;gap:10px;align-items:flex-end;height:120px}
+.stall div{flex:1;border-radius:10px 10px 4px 4px;background:var(--soft)}
+.stall div:nth-child(1){height:40%}.stall div:nth-child(2){height:62%}.stall div:nth-child(3){height:82%}
+.stall div:nth-child(4){height:100%;background:var(--sun)}
+.perks{display:flex;flex-direction:column;gap:10px}
+.perks div{display:flex;gap:10px;align-items:center;font-weight:500}
+.perks svg{flex:none}
+.big{background:var(--brand);color:var(--brand-ink);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:6px}
+.big small{opacity:.85;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12px}
+.big strong{font-family:var(--display);font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+.badge{align-self:flex-start;background:var(--sun);color:var(--sun-ink);font-weight:700;border-radius:99px;padding:6px 12px;font-size:14px}
+.rows{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.rows div{display:flex;justify-content:space-between;gap:12px;padding:13px 14px;border-top:1px solid var(--line)}
+.rows div:first-child{border-top:0}
+.rows span{color:var(--muted)}
+.rows b{font-variant-numeric:tabular-nums;text-align:right}
+.bar{height:10px;border-radius:10px;background:rgba(255,255,255,.25);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--sun);border-radius:10px;transition:width .5s}
+.toast{background:var(--soft);border-radius:12px;padding:12px 14px;font-weight:600;color:var(--ok)}
+body{margin:0}[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="top">
+    <div class="logo"><span class="mark"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 14V7M8 7C8 4 10 2 13 2c0 3-2 5-5 5Zm0 2C8 6 6 4 3 4c0 3 2 5 5 5Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span><span id="brand">Kreciva</span></div>
+    <span class="demo">Demo</span>
+  </div>
+  <div id="view"></div>
+</div>
+
+<script>
+const BRAND = "Kreciva";
+const RATE = 0.025; // tasa mensual de ejemplo
+const S = {nombre:"",tel:"",edad:"",genero:"",negocio:"",tiempo:"",ingresos:"",objetivo:"",tiene:null,conQuien:"",debe:"",monto:"",uso:"",plazo:6,pagadas:0};
+const $ = s => document.querySelector(s);
+const fmt = n => "$" + Math.round(n).toLocaleString("es-GT");
+const cuota = () => { const P=+S.monto||0, n=S.plazo; return P*RATE/(1-Math.pow(1+RATE,-n)); };
+const esc = v => String(v).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const leaf = '<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="11" fill="var(--soft)"/><path d="M7 11.5l2.6 2.6L15 8.6" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function steps(n){ return '<div class="steps">'+[1,2,3,4].map(i=>`<i class="${i<=n?'on':''}"></i>`).join("")+'</div>'; }
+function chips(name, opts, cur){ return '<div class="chips">'+opts.map(o=>`<button type="button" class="chip" data-g="${name}" data-v="${o}" aria-pressed="${o===cur}">${o}</button>`).join("")+'</div>'; }
+
+const screens = {
+  inicio(){ return `
+    <section class="screen hero">
+      <div class="stall" aria-hidden="true"><div></div><div></div><div></div><div></div></div>
+      <h1>Crédito para tu negocio, sin papeleo.</h1>
+      <p class="lead">Para la tienda, el puesto del mercado o el negocio de la casa. Pide desde tu celular y recibe respuesta en minutos.</p>
+      <div class="perks">
+        <div>${leaf} Sin fiador ni historial bancario</div>
+        <div>${leaf} Cuotas fijas que puedes planear</div>
+        <div>${leaf} Disponible en toda Latinoamérica</div>
+      </div>
+    </section>
+    <div class="cta"><button class="btn" data-go="registro">Empezar</button></div>`; },
+
+  registro(){ return `
+    <button class="back" data-go="inicio">← Atrás</button>
+    ${steps(1)}
+    <section class="screen">
+      <h2>Cuéntanos de ti y tu negocio</h2>
+      <div class="field"><label for="nombre">Nombre completo</label><input id="nombre" autocomplete="name" value="${esc(S.nombre)}" placeholder="Ej. María López"></div>
+      <div class="field"><label for="tel">Teléfono</label><input id="tel" type="tel" inputmode="tel" value="${esc(S.tel)}" placeholder="Ej. 5555 1234"></div>
+      <div class="field"><label for="edad">Edad</label><input id="edad" type="number" inputmode="numeric" min="18" max="99" value="${esc(S.edad)}" placeholder="Ej. 35"></div>
+      <div class="field"><span class="lbl">Género</span>${chips("genero",["Mujer","Hombre","Prefiero no decir"],S.genero)}</div>
+      <div class="field"><span class="lbl">Tipo de negocio</span>${chips("negocio",["Tienda","Comida","Ropa","Servicios","Otro"],S.negocio)}</div>
+      <div class="field"><span class="lbl">Tiempo con tu negocio</span>${chips("tiempo",["Menos de 1 año","1 a 3 años","3 a 5 años","Más de 5 años"],S.tiempo)}</div>
+      <div class="field"><label for="ingresos">Ingresos anuales aproximados</label>
+        <div class="money"><span>$</span><input id="ingresos" type="number" inputmode="numeric" min="0" value="${esc(S.ingresos)}" placeholder="6000"></div>
+        <span class="hint">Lo que vende tu negocio en un año, más o menos</span></div>
+      <div class="field"><label for="objetivo">🎯 ¿Cuánto dinero quieres conseguir?</label>
+        <div class="money"><span>$</span><input id="objetivo" type="number" inputmode="numeric" min="50" value="${esc(S.objetivo)}" placeholder="500"></div>
+        <span class="hint">Desde $50 hasta $5,000</span></div>
+      <div class="field"><span class="lbl">💳 ¿Tienes préstamos actualmente?</span>${chips("tiene",["Sí","No"],S.tiene)}</div>
+      <div class="sub" id="prest" ${S.tiene==="Sí"?"":"hidden"}>
+        <div class="field"><label for="conQuien">¿Con quién?</label><input id="conQuien" value="${esc(S.conQuien)}" placeholder="Ej. cooperativa, prestamista, familiar"></div>
+        <div class="field"><label for="debe">¿Cuánto debes?</label><div class="money"><span>$</span><input id="debe" type="number" inputmode="numeric" value="${esc(S.debe)}" placeholder="200"></div></div>
+      </div>
+      <p class="err" id="err" hidden></p>
+    </section>
+    <div class="cta"><button class="btn" id="next1">Continuar</button></div>`; },
+
+  solicitud(){ if(!S.monto) S.monto=S.objetivo; return `
+    <button class="back" data-go="registro">← Atrás</button>
+    ${steps(2)}
+    <section class="screen">
+      <h2>Arma tu crédito</h2>
+      <div class="field"><label for="monto">Monto</label><div class="money"><span>$</span><input id="monto" type="number" inputmode="numeric" value="${esc(S.monto)}"></div>
+        <span class="hint">Tomamos el objetivo que nos diste. Puedes cambiarlo.</span></div>
+      <div class="field"><span class="lbl">¿Para qué lo vas a usar?</span>${chips("uso",["Inventario","Equipo","Local","Otro"],S.uso)}</div>
+      <div class="field"><span class="lbl">Plazo</span><div class="seg chips">${[3,6,12].map(m=>`<button type="button" class="chip" data-g="plazo" data-v="${m}" aria-pressed="${m===S.plazo}">${m} meses</button>`).join("")}</div></div>
+      <div class="est"><span>Cuota mensual aprox.</span><b id="est">${fmt(cuota())}</b></div>
+      <p class="err" id="err" hidden></p>
+    </section>
+    <div class="cta"><button class="btn" id="next2">Solicitar crédito</button></div>`; },
+
+  resultado(){ const c=cuota(); return `
+    ${steps(3)}
+    <section class="screen">
+      <span class="badge">¡Aprobado!</span>
+      <h2>${esc(S.nombre.split(" ")[0]||"Listo")}, tu crédito está listo 🎉</h2>
+      <div class="big"><small>Monto aprobado</small><strong>${fmt(S.monto)}</strong><span>Depósito a tu cuenta o billetera en menos de 24 h</span></div>
+      <div class="rows">
+        <div><span>Cuota mensual</span><b>${fmt(c)}</b></div>
+        <div><span>Plazo</span><b>${S.plazo} meses</b></div>
+        <div><span>Tasa mensual</span><b>${(RATE*100).toFixed(1)}%</b></div>
+        <div><span>Total a pagar</span><b>${fmt(c*S.plazo)}</b></div>
+        <div><span>Uso</span><b>${esc(S.uso)}</b></div>
+      </div>
+    </section>
+    <div class="cta"><button class="btn sun" data-go="micredito">Ver mi crédito</button></div>`; },
+
+  micredito(){ const c=cuota(), total=c*S.plazo, saldo=Math.max(0,total-c*S.pagadas), pct=Math.round(S.pagadas/S.plazo*100), done=S.pagadas>=S.plazo; return `
+    ${steps(4)}
+    <section class="screen">
+      <h2>Mi crédito</h2>
+      <div class="big"><small>Saldo pendiente</small><strong>${fmt(saldo)}</strong>
+        <div class="bar" aria-label="Avance ${pct}%"><i style="width:${pct}%"></i></div>
+        <span>${S.pagadas} de ${S.plazo} cuotas pagadas</span></div>
+      <div class="rows">
+        <div><span>Próximo pago</span><b>${done?"—":fmt(c)}</b></div>
+        <div><span>Fecha</span><b>${done?"Crédito pagado":nextDate()}</b></div>
+        <div><span>Negocio</span><b>${esc(S.negocio||"—")}</b></div>
+      </div>
+      ${S.pagadas?`<p class="toast">${done?"¡Terminaste de pagar! Ya puedes pedir un crédito más grande.":"Pago registrado. ¡Vas muy bien!"}</p>`:""}
+    </section>
+    <div class="cta" style="display:flex;flex-direction:column;gap:10px">
+      ${done?"":`<button class="btn" id="pagar">Pagar ${fmt(c)}</button>`}
+      <button class="btn ghost" id="reiniciar">Volver a empezar</button>
+    </div>`; }
+};
+
+function nextDate(){ const d=new Date(); d.setMonth(d.getMonth()+1+S.pagadas); return d.toLocaleDateString("es-GT",{day:"numeric",month:"long"}); }
+
+function go(name){ $("#view").innerHTML = screens[name](); window.scrollTo(0,0); bind(name); }
+
+function showErr(msg){ const e=$("#err"); e.textContent=msg; e.hidden=false; }
+
+function bind(name){
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
+    const g=b.dataset.g, v=g==="plazo"?+b.dataset.v:b.dataset.v; S[g]=v;
+    document.querySelectorAll(`[data-g="${g}"]`).forEach(x=>x.setAttribute("aria-pressed", x===b));
+    if(g==="tiene") $("#prest").hidden = v!=="Sí";
+    if(g==="plazo") $("#est").textContent=fmt(cuota());
+  });
+  document.querySelectorAll("input").forEach(i=>i.oninput=()=>{ S[i.id]=i.value; if(i.id==="monto") $("#est").textContent=fmt(cuota()); });
+  if(name==="registro") $("#next1").onclick=()=>{
+    if(!S.nombre.trim()) return showErr("Escribe tu nombre para continuar.");
+    if(!S.tel.trim()) return showErr("Escribe tu teléfono para continuar.");
+    if(!(+S.edad>=18 && +S.edad<=99)) return showErr("Escribe una edad válida (18 años o más).");
+    if(!S.genero) return showErr("Elige una opción de género.");
+    if(!S.negocio) return showErr("Elige el tipo de negocio.");
+    if(!S.tiempo) return showErr("Cuéntanos cuánto tiempo tienes con tu negocio.");
+    if(!(+S.ingresos>0)) return showErr("Escribe tus ingresos anuales aproximados.");
+    if(!(+S.objetivo>=50)) return showErr("El objetivo debe ser de al menos $50.");
+    if(!S.tiene) return showErr("Cuéntanos si tienes préstamos actualmente.");
+    S.monto=""; go("solicitud");
+  };
+  if(name==="solicitud") $("#next2").onclick=()=>{
+    if(!(+S.monto>=50 && +S.monto<=5000)) return showErr("El monto debe estar entre $50 y $5,000.");
+    if(!S.uso) return showErr("Elige para qué vas a usar el crédito.");
+    go("resultado");
+  };
+  if(name==="micredito"){
+    const p=$("#pagar"); if(p) p.onclick=()=>{ S.pagadas++; go("micredito"); };
+    $("#reiniciar").onclick=()=>{ Object.assign(S,{nombre:"",tel:"",edad:"",genero:"",negocio:"",tiempo:"",ingresos:"",objetivo:"",tiene:null,conQuien:"",debe:"",monto:"",uso:"",plazo:6,pagadas:0}); go("inicio"); };
+  }
+}
+go("inicio");
+</script>
+</body>
+</html>

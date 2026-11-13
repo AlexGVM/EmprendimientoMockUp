@@ -3,123 +3,299 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Impulsa Mockup</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<title>Impulsa</title>
+<meta name="description" content="Impulsa: ordena tu historial y llega al crédito formal.">
+<meta name="theme-color" content="#FFF8EE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
 <style>
-/* Layout: one phone-width column, one screen visible at a time, sticky action at the bottom */
+/* Paleta y tipografía del Manual de marca Impulsa v1. Una sola columna tipo celular. */
 :root{
-  --bg:#EEF4F1; --surface:#FFFFFF; --ink:#12302A; --muted:#5A716B; --line:#D3E0DB;
-  --brand:#0F6B57; --brand-ink:#FFFFFF; --sun:#F2B632; --sun-ink:#3A2A00; --soft:#E1EEE9; --ok:#1B8A5A; --warn:#B3261E;
-  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
-  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --naranja:#F2711C; --azul:#1B2A41; --crema:#FFF8EE; --arena:#FBEBD3;
+  --verde:#1A7A50; --amarillo:#FFC93C; --gris:#5B6474; --error:#B42318; --blanco:#FFFFFF;
+  --linea:#EAD9BF;
+  --font:"Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#0B1A17; --surface:#122622; --ink:#E4F1EC; --muted:#93ADA6; --line:#25403A;
-  --brand:#3FBF9C; --brand-ink:#06201A; --sun:#F2B632; --sun-ink:#2A1E00; --soft:#183430; --ok:#4FD39A; --warn:#FF8A80; color-scheme:dark }}
-:root[data-theme="dark"]{
-  --bg:#0B1A17; --surface:#122622; --ink:#E4F1EC; --muted:#93ADA6; --line:#25403A;
-  --brand:#3FBF9C; --brand-ink:#06201A; --sun:#F2B632; --sun-ink:#2A1E00; --soft:#183430; --ok:#4FD39A; --warn:#FF8A80; color-scheme:dark }
 *{box-sizing:border-box}
 html,body{height:100%}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;
+body{margin:0;background:var(--crema);color:var(--azul);font-family:var(--font);font-size:16px;line-height:1.45;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
-.app{max-width:420px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding-block:16px 24px}
+[hidden]{display:none!important}
+.app{max-width:420px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding-block:max(16px, env(safe-area-inset-top,0px)) 24px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px}
-.logo{display:flex;align-items:center;gap:8px;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em}
-.mark{width:28px;height:28px;border-radius:8px;background:var(--brand);display:grid;place-items:center}
-.demo{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 8px}
-.back{background:none;border:0;color:var(--brand);font:600 15px var(--body);padding:8px 0;cursor:pointer}
-.steps{display:flex;gap:6px;margin:14px 0 4px}
-.steps i{flex:1;height:4px;border-radius:4px;background:var(--line)}
-.steps i.on{background:var(--brand)}
+
+/* Logo: "Impulsa" en Nunito ExtraBold con el punto de la i en naranja */
+.logo{font-weight:800;font-size:26px;letter-spacing:-.01em;color:var(--azul);line-height:1}
+.logo .i{position:relative;display:inline-block}
+.logo .i::after{content:"";position:absolute;left:50%;top:-.02em;width:.22em;height:.22em;border-radius:50%;background:var(--naranja);transform:translateX(-50%)}
+.demo{font-size:13px;font-weight:700;color:var(--gris);background:var(--arena);border-radius:99px;padding:4px 10px}
+
+.back{background:none;border:0;color:var(--azul);font:700 16px var(--font);padding:8px 0;cursor:pointer;align-self:flex-start}
+.steps{display:flex;gap:6px;margin:10px 0 4px}
+.steps i{flex:1;height:6px;border-radius:6px;background:var(--arena)}
+.steps i.on{background:var(--naranja)}
 .screen{flex:1;display:flex;flex-direction:column;gap:18px;padding-top:10px;animation:in .25s ease}
 @keyframes in{from{transform:translateY(6px);opacity:.6}to{transform:none;opacity:1}}
-@media (prefers-reduced-motion:reduce){.screen{animation:none}}
-h1,h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;margin:0;text-wrap:balance}
-h1{font-size:40px;line-height:1.02}
-h2{font-size:28px;line-height:1.1}
+@media (prefers-reduced-motion:reduce){.screen,.pill-anim i{animation:none!important}}
+
+h1,h2,h3{font-weight:800;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:40px;line-height:1.05}
+h2{font-size:28px;line-height:1.12}
+h3{font-size:20px;font-weight:700}
 p{margin:0}
-.lead{color:var(--muted);font-size:17px}
+.lead{font-size:18px}
+.nota{font-size:13px;font-weight:600;color:var(--gris)}
+
+/* Forma gráfica: píldoras que suben como escalones */
+.pills{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.pills i{display:block;height:22px;border-radius:22px;background:var(--amarillo)}
+.pills i:nth-child(1){width:34%;margin-right:0}
+.pills i:nth-child(2){width:34%;margin-right:12%}
+.pills i:nth-child(3){width:34%;margin-right:24%}
+.pills i:nth-child(4){width:34%;margin-right:36%;background:var(--naranja)}
+
+.promesas{display:flex;flex-direction:column;gap:8px}
+.promesa{display:flex;align-items:stretch;border-radius:14px;overflow:hidden;background:var(--arena)}
+.promesa b{flex:none;width:44px;display:grid;place-items:center;background:var(--verde);color:var(--blanco);font-weight:800;font-size:18px}
+.promesa span{padding:10px 12px;font-weight:700;font-size:15px}
+
+/* Formularios */
 .field{display:flex;flex-direction:column;gap:6px}
-label,.lbl{font-weight:600;font-size:14px}
-.hint{font-size:13px;color:var(--muted)}
-input{width:100%;font:500 17px var(--body);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px}
-input:focus,button:focus-visible{outline:3px solid var(--sun);outline-offset:1px;border-color:var(--brand)}
+label,.lbl{font-weight:700;font-size:16px}
+.hint{font-size:13px;font-weight:600;color:var(--gris)}
+input[type=text],input[type=tel],input[type=number]{width:100%;font:600 17px var(--font);color:var(--azul);background:var(--blanco);border:2px solid var(--linea);border-radius:14px;padding:13px 14px}
+input::placeholder{color:#9AA1AD}
+input:focus{outline:none;border-color:var(--naranja)}
+button:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
 .money{position:relative}
-.money span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--muted)}
-.money input{padding-left:30px;font-variant-numeric:tabular-nums;font-weight:700}
+.money span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-weight:800;color:var(--gris)}
+.money input{padding-left:42px!important;font-variant-numeric:tabular-nums;font-weight:800!important}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:9px 14px;font:600 14px var(--body);cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.seg .chip{border-radius:12px;padding:12px 6px;text-align:center}
-.sub{display:flex;flex-direction:column;gap:14px;padding:14px;border-radius:14px;background:var(--soft)}
-.err{color:var(--warn);font-size:13px;font-weight:600}
-.cta{position:sticky;bottom:0;padding-top:12px;padding-bottom:env(safe-area-inset-bottom,0px);background:linear-gradient(to top,var(--bg) 70%,transparent);margin-top:auto}
-.btn{width:100%;border:0;border-radius:14px;padding:16px;font:700 17px var(--body);cursor:pointer;background:var(--brand);color:var(--brand-ink)}
-.btn.sun{background:var(--sun);color:var(--sun-ink)}
-.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
-.est{display:flex;justify-content:space-between;align-items:baseline;padding:14px;border-radius:14px;border:1.5px dashed var(--line)}
-.est b{font-family:var(--display);font-size:24px;font-variant-numeric:tabular-nums}
-.hero{flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px}
-.stall{display:flex;gap:10px;align-items:flex-end;height:120px}
-.stall div{flex:1;border-radius:10px 10px 4px 4px;background:var(--soft)}
-.stall div:nth-child(1){height:40%}.stall div:nth-child(2){height:62%}.stall div:nth-child(3){height:82%}
-.stall div:nth-child(4){height:100%;background:var(--sun)}
-.perks{display:flex;flex-direction:column;gap:10px}
-.perks div{display:flex;gap:10px;align-items:center;font-weight:500}
-.perks svg{flex:none}
-.big{background:var(--brand);color:var(--brand-ink);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:6px}
-.big small{opacity:.85;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12px}
-.big strong{font-family:var(--display);font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
-.badge{align-self:flex-start;background:var(--sun);color:var(--sun-ink);font-weight:700;border-radius:99px;padding:6px 12px;font-size:14px}
-.rows{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:14px}
-.rows div{display:flex;justify-content:space-between;gap:12px;padding:13px 14px;border-top:1px solid var(--line)}
-.rows div:first-child{border-top:0}
-.rows span{color:var(--muted)}
-.rows b{font-variant-numeric:tabular-nums;text-align:right}
-.bar{height:10px;border-radius:10px;background:rgba(255,255,255,.25);overflow:hidden}
-.bar i{display:block;height:100%;background:var(--sun);border-radius:10px;transition:width .5s}
-.toast{background:var(--soft);border-radius:12px;padding:12px 14px;font-weight:600;color:var(--ok)}
-body{margin:0}[hidden]{display:none!important}
+.chip{border:2px solid var(--linea);background:var(--blanco);color:var(--azul);border-radius:99px;padding:9px 14px;font:700 15px var(--font);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--azul);border-color:var(--azul);color:var(--blanco)}
+.sub{display:flex;flex-direction:column;gap:14px;padding:14px;border-radius:16px;background:var(--arena)}
+.err{color:var(--error);font-size:15px;font-weight:700}
+
+/* Fuentes del historial */
+.fuentes{display:flex;flex-direction:column;gap:10px}
+.fuente{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--blanco);border:2px solid var(--linea);text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.fuente .ico{flex:none;width:42px;height:42px;border-radius:12px;background:var(--arena);display:grid;place-items:center;font-size:22px}
+.fuente .txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.fuente .txt b{font-size:16px}
+.fuente .txt small{font-size:13px;font-weight:600;color:var(--gris)}
+.fuente .est{flex:none;font-size:13px;font-weight:800;border-radius:99px;padding:5px 10px;background:var(--arena);color:var(--azul)}
+.fuente[aria-pressed="true"]{border-color:var(--verde)}
+.fuente[aria-pressed="true"] .est{background:var(--verde);color:var(--blanco)}
+.contador{font-weight:700;color:var(--verde)}
+
+/* Reporte */
+.cargando{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding-block:40px}
+.pill-anim{display:flex;gap:8px;align-items:flex-end;height:70px}
+.pill-anim i{width:22px;border-radius:22px;background:var(--amarillo);animation:sube 1s ease-in-out infinite alternate}
+.pill-anim i:nth-child(1){height:30%}.pill-anim i:nth-child(2){height:50%;animation-delay:.15s}.pill-anim i:nth-child(3){height:70%;animation-delay:.3s}.pill-anim i:nth-child(4){height:90%;animation-delay:.45s;background:var(--naranja)}
+@keyframes sube{to{transform:translateY(-10px)}}
+.nivel{background:var(--azul);color:var(--blanco);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.nivel small{font-size:13px;font-weight:700;color:var(--amarillo)}
+.nivel strong{font-size:28px;font-weight:800;line-height:1.1}
+.escalones{display:flex;gap:6px;align-items:flex-end;height:56px}
+.escalones i{flex:1;border-radius:10px;background:rgba(255,255,255,.14)}
+.escalones i.on{background:var(--amarillo)}
+.escalones i:nth-child(1){height:30%}.escalones i:nth-child(2){height:47%}.escalones i:nth-child(3){height:64%}.escalones i:nth-child(4){height:82%}.escalones i:nth-child(5){height:100%}
+.lista{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.lista li{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--blanco)}
+.lista li .dot{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;margin-top:1px}
+.ok .dot{background:var(--verde);color:var(--blanco)}
+.mejora li{background:var(--arena)}
+.mejora .dot{background:var(--naranja);color:var(--azul)}
+.cifra{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px;border-radius:16px;background:var(--arena)}
+.cifra b{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums}
+
+/* Entidades */
+.entidades{display:flex;flex-direction:column;gap:12px}
+.ent{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:18px;background:var(--blanco);border:2px solid var(--linea);text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.ent[aria-pressed="true"]{border-color:var(--naranja);box-shadow:0 0 0 2px var(--naranja) inset}
+.ent[disabled]{cursor:default;opacity:.65}
+.ent-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.ent-top b{font-size:18px}
+.tipo{font-size:13px;font-weight:700;color:var(--gris)}
+.tag{flex:none;font-size:13px;font-weight:800;border-radius:99px;padding:4px 10px;background:var(--verde);color:var(--blanco)}
+.tag.medio{background:var(--amarillo);color:var(--azul)}
+.tag.no{background:var(--arena);color:var(--gris)}
+.ent-num{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ent-num div{display:flex;flex-direction:column;background:var(--crema);border-radius:12px;padding:10px 12px}
+.ent-num span{font-size:13px;font-weight:600;color:var(--gris)}
+.ent-num strong{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.ent-pie{font-size:14px;font-weight:600;color:var(--gris)}
+.check{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:var(--arena);cursor:pointer}
+.check input{flex:none;width:22px;height:22px;accent-color:var(--verde);margin-top:1px}
+.check span{font-weight:700}
+
+/* Seguimiento */
+.seg-card{display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:18px;background:var(--blanco);border:2px solid var(--linea)}
+.linea{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none}
+.linea li{display:flex;gap:12px;align-items:center;position:relative;padding:6px 0}
+.linea li .p{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;background:var(--arena);color:var(--gris);z-index:1}
+.linea li.hecho .p{background:var(--verde);color:var(--blanco)}
+.linea li.ahora .p{background:var(--amarillo);color:var(--azul)}
+.linea li:not(:last-child)::after{content:"";position:absolute;left:12px;top:30px;width:2px;height:calc(100% - 22px);background:var(--linea)}
+.linea li span{font-weight:700}
+.linea li.pend span{color:var(--gris);font-weight:600}
+.festejo{background:var(--amarillo);color:var(--azul);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.festejo strong{font-size:24px;font-weight:800}
+
+/* Otras opciones */
+.opciones{display:flex;flex-direction:column;gap:10px}
+.opcion{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--blanco);border:2px solid var(--linea);text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.opcion .ico{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:var(--arena)}
+.opcion .txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.opcion .txt b{font-size:16px}
+.opcion .txt small{font-size:13px;font-weight:600;color:var(--gris)}
+.opcion .flecha{flex:none;font-weight:800;font-size:20px}
+.mejora li.link{cursor:pointer}
+.mejora li.link u{text-decoration-thickness:2px;text-underline-offset:3px}
+
+/* Formalizar */
+.pasos{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.pasos label{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:var(--blanco);border:2px solid var(--linea);cursor:pointer;font-weight:600}
+.pasos label:has(input:checked){border-color:var(--verde)}
+.pasos input{flex:none;width:22px;height:22px;accent-color:var(--verde);margin-top:1px}
+.pasos .txt{display:flex;flex-direction:column;gap:2px}
+.pasos .txt b{font-weight:800}
+.pasos .txt small{font-size:13px;color:var(--gris)}
+.barra{height:12px;border-radius:12px;background:var(--arena);overflow:hidden}
+.barra i{display:block;height:100%;border-radius:12px;background:var(--verde);transition:width .3s}
+.aviso{background:var(--verde);color:var(--blanco);border-radius:16px;padding:14px 16px;font-weight:700}
+
+/* Panel empresa */
+.banda{background:var(--azul);color:var(--blanco);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.banda small{font-size:13px;font-weight:700;color:var(--amarillo)}
+.banda strong{font-size:22px;font-weight:800}
+.resumen{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.resumen div{background:var(--blanco);border-radius:14px;padding:12px;display:flex;flex-direction:column}
+.resumen strong{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
+.resumen span{font-size:13px;font-weight:600;color:var(--gris)}
+.clientes{display:flex;flex-direction:column;gap:10px}
+.cli{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--blanco);border:2px solid var(--linea);text-align:left;font:inherit;color:inherit;cursor:pointer;width:100%}
+.cli .ini{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--arena);font-weight:800}
+.cli .txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.cli .txt small{font-size:13px;font-weight:600;color:var(--gris)}
+.mini{display:flex;gap:3px;align-items:flex-end;height:22px;flex:none}
+.mini i{width:6px;border-radius:6px;background:var(--arena)}
+.mini i.on{background:var(--amarillo)}
+.mini i:nth-child(1){height:30%}.mini i:nth-child(2){height:47%}.mini i:nth-child(3){height:64%}.mini i:nth-child(4){height:82%}.mini i:nth-child(5){height:100%}
+.regs{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.regs li{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--blanco)}
+.regs .k{flex:none;width:10px;height:10px;border-radius:50%}
+.regs .k.ok{background:var(--verde)}.regs .k.cr{background:var(--azul)}.regs .k.at{background:var(--naranja)}
+.regs .txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.regs .txt small{font-size:13px;font-weight:600;color:var(--gris)}
+.regs b{font-variant-numeric:tabular-nums}
+.form-card{display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:18px;background:var(--arena)}
+input[type=date]{width:100%;font:600 17px var(--font);color:var(--azul);background:var(--blanco);border:2px solid var(--linea);border-radius:14px;padding:12px 14px}
+.toast{background:var(--verde);color:var(--blanco);border-radius:14px;padding:12px 14px;font-weight:700}
+
+/* Botones: naranja con texto azul, nunca blanco sobre naranja */
+.cta{position:sticky;bottom:0;display:flex;flex-direction:column;gap:10px;padding-top:14px;padding-bottom:env(safe-area-inset-bottom,0px);background:linear-gradient(to top,var(--crema) 75%,rgba(255,248,238,0));margin-top:auto}
+.btn{width:100%;border:0;border-radius:16px;padding:16px;font:800 18px var(--font);cursor:pointer;background:var(--naranja);color:var(--azul)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.sec{background:transparent;color:var(--azul);border:2px solid var(--azul)}
 </style>
 </head>
 <body>
-
 <div class="app">
   <div class="top">
-    <div class="logo"><span class="mark"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 14V7M8 7C8 4 10 2 13 2c0 3-2 5-5 5Zm0 2C8 6 6 4 3 4c0 3 2 5 5 5Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></span><span id="brand">Impulsa</span></div>
+    <div class="logo" aria-label="Impulsa"><span class="i">ı</span>mpulsa</div>
     <span class="demo">Demo</span>
   </div>
   <div id="view"></div>
 </div>
 
 <script>
-const BRAND = "Impulsa";
-const RATE = 0.025; // tasa mensual de ejemplo
-const S = {nombre:"",tel:"",edad:"",genero:"",negocio:"",tiempo:"",ingresos:"",objetivo:"",tiene:null,conQuien:"",debe:"",monto:"",uso:"",plazo:6,pagadas:0};
+const VACIO = () => ({nombre:"",tel:"",edad:"",genero:"",negocio:"",tiempo:"",ingresos:"",objetivo:"",tiene:null,conQuien:"",debe:"",fuentes:[],elegidas:[],acepto:false,avance:0,tipoEmp:"",pasosOk:[],asesor:false,volver:"inicio"});
+let S = VACIO();
 const $ = s => document.querySelector(s);
-const fmt = n => "$" + Math.round(n).toLocaleString("es-GT");
-const cuota = () => { const P=+S.monto||0, n=S.plazo; return P*RATE/(1-Math.pow(1+RATE,-n)); };
+const fmt = n => "S/ " + Math.round(n).toLocaleString("es-PE");
 const esc = v => String(v).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const leaf = '<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="11" fill="var(--soft)"/><path d="M7 11.5l2.6 2.6L15 8.6" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const nombre1 = () => esc(S.nombre.trim().split(" ")[0] || "");
 
-function steps(n){ return '<div class="steps">'+[1,2,3,4].map(i=>`<i class="${i<=n?'on':''}"></i>`).join("")+'</div>'; }
+const FUENTES = [
+  {id:"billetera", ico:"📱", t:"Pagos por Yape o Plin", d:"Cobros y pagos desde tu celular"},
+  {id:"ventas", ico:"📒", t:"Tus ventas", d:"Foto del cuaderno o lo que vendes en línea"},
+  {id:"juntas", ico:"🤝", t:"Juntas cumplidas", d:"Cuando siempre pagaste tu parte"},
+  {id:"recibos", ico:"💡", t:"Recibos de luz, agua o teléfono", d:"Pagados a tiempo, a tu nombre"},
+  {id:"referencias", ico:"⭐", t:"Clientes y proveedores", d:"Personas que responden por ti"}
+];
+const ENTIDADES = [
+  {id:"coop", n:"Cooperativa Raíces", tipo:"Cooperativa", factor:1.0, r:0.020, min:1},
+  {id:"caja", n:"Caja Solidaria del Valle", tipo:"Caja rural", factor:0.8, r:0.025, min:1},
+  {id:"banco", n:"Banco Comunal Horizonte", tipo:"Banco", factor:1.4, r:0.017, min:4}
+];
+
+const HOY = new Date();
+const fechaRel = d => { const x=new Date(HOY); x.setDate(x.getDate()-d); return x.toISOString().slice(0,10); };
+let E = { clientes:[
+  {id:1,nombre:"Rosa Pérez",tel:"987 112 334",negocio:"Tienda",regs:[
+    {tipo:"ok",monto:420,fecha:fechaRel(9)},{tipo:"cr",monto:1220,fecha:fechaRel(20)},{tipo:"ok",monto:400,fecha:fechaRel(38)},{tipo:"ok",monto:450,fecha:fechaRel(68)},{tipo:"ok",monto:380,fecha:fechaRel(99)}]},
+  {id:2,nombre:"Luis Quispe",tel:"965 432 187",negocio:"Comida",regs:[
+    {tipo:"ok",monto:280,fecha:fechaRel(5)},{tipo:"at",monto:280,fecha:fechaRel(35)},{tipo:"cr",monto:840,fecha:fechaRel(50)}]},
+  {id:3,nombre:"Ana Morales",tel:"912 345 221",negocio:"Ropa",regs:[
+    {tipo:"ok",monto:700,fecha:fechaRel(12)}]}
+], sel:null, nuevoTipo:"ok", toast:"" };
+const TIPOS_REG = {ok:"Pagó a tiempo", cr:"Compró al crédito", at:"Pagó con atraso"};
+const nivelCli = c => { const ok=c.regs.filter(r=>r.tipo==="ok").length, at=c.regs.filter(r=>r.tipo==="at").length; return Math.max(1,Math.min(5,1+Math.floor(ok*0.8)-at)); };
+const iniciales = n => n.trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase();
+const fechaTxt = f => new Date(f+"T12:00:00").toLocaleDateString("es-PE",{day:"numeric",month:"short",year:"numeric"});
+
+const PASOS = {
+  "Solo yo": [
+    {t:"Saca tu RUC en la SUNAT", d:"Gratis y en línea, como persona natural con negocio"},
+    {t:"Elige tu régimen de impuestos", d:"Si vendes poco, el Nuevo RUS suele ser el más simple"},
+    {t:"Pide tu licencia de funcionamiento", d:"En la municipalidad de tu distrito, si tienes local"},
+    {t:"Emite boletas y facturas electrónicas", d:"Desde la SUNAT o un sistema de facturación"},
+    {t:"Abre una cuenta de banco del negocio", d:"Separa tu dinero del de la casa"}],
+  "Con socios": [
+    {t:"Reserva el nombre de tu empresa", d:"En la SUNARP, en línea"},
+    {t:"Prepara el acto constitutivo (minuta)", d:"Quiénes son los socios y cuánto pone cada uno"},
+    {t:"Firma la escritura pública", d:"Ante un notario, junto a tus socios"},
+    {t:"Inscribe la empresa en la SUNARP", d:"Registros Públicos; muchas veces lo hace la notaría"},
+    {t:"Saca el RUC de la empresa en la SUNAT", d:"Y elige su régimen de impuestos"},
+    {t:"Pide tu licencia de funcionamiento", d:"En la municipalidad, si tienes local"}]
+};
+const pasosTot = () => (PASOS[S.tipoEmp]||[]).length;
+const formalPts = () => S.pasosOk.length>=3 ? 1 : 0;
+
+function nivel(){
+  let p = S.fuentes.length;
+  p += {"Menos de 1 año":0,"1 a 3 años":1,"3 a 5 años":2,"Más de 5 años":2}[S.tiempo] || 0;
+  if (S.tiene === "No") p += 1;
+  p += formalPts();
+  return Math.max(1, Math.min(5, Math.round(p * 5 / 8)));
+}
+const NOMBRES_NIVEL = ["","Empezando","Dando pasos","En camino","Casi listo","Listo para crédito"];
+const capacidad = () => (+S.ingresos || 0) * (0.5 + 0.25 * nivel());
+const montoEnt = e => Math.round(capacidad() * e.factor / 50) * 50;
+const cuota = (P, r, n=12) => P * r / (1 - Math.pow(1 + r, -n));
+
+function steps(n){ return '<div class="steps">'+[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join("")+'</div>'; }
 function chips(name, opts, cur){ return '<div class="chips">'+opts.map(o=>`<button type="button" class="chip" data-g="${name}" data-v="${o}" aria-pressed="${o===cur}">${o}</button>`).join("")+'</div>'; }
 
 const screens = {
   inicio(){ return `
-    <section class="screen hero">
-      <div class="stall" aria-hidden="true"><div></div><div></div><div></div><div></div></div>
-      <h1>Crédito para tu negocio, sin papeleo.</h1>
-      <p class="lead">Para la tienda, el puesto del mercado o el negocio de la casa. Pide desde tu celular y recibe respuesta en minutos.</p>
-      <div class="perks">
-        <div>${leaf} Sin fiador ni historial bancario</div>
-        <div>${leaf} Cuotas fijas que puedes planear</div>
-        <div>${leaf} Disponible en toda Latinoamérica</div>
+    <section class="screen">
+      <div class="pills" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <h1>Tu esfuerzo cuenta.</h1>
+      <p class="lead">Tu historial no está perdido, solo está desordenado. Lo ordenamos contigo y te conectamos con bancos, cajas y cooperativas que sí te pueden prestar.</p>
+      <div class="promesas">
+        <div class="promesa"><b>1</b><span>Nunca te pedimos contraseñas ni plata por adelantado.</span></div>
+        <div class="promesa"><b>2</b><span>Nunca tocamos tus contactos.</span></div>
+        <div class="promesa"><b>3</b><span>Tus datos solo llegan a un banco si tú dices que sí.</span></div>
+      </div>
+      <h3>También puedes</h3>
+      <div class="opciones">
+        <button type="button" class="opcion" data-formal="inicio"><span class="ico" aria-hidden="true">🏪</span><span class="txt"><b>Formalizar tu negocio</b><small>Te guiamos paso a paso para constituir tu empresa</small></span><span class="flecha" aria-hidden="true">›</span></button>
+        <button type="button" class="opcion" data-go="empresa"><span class="ico" aria-hidden="true">🏢</span><span class="txt"><b>Soy empresa</b><small>Agrega el historial de pago de tus clientes</small></span><span class="flecha" aria-hidden="true">›</span></button>
       </div>
     </section>
     <div class="cta"><button class="btn" data-go="registro">Empezar</button></div>`; },
@@ -129,112 +305,256 @@ const screens = {
     ${steps(1)}
     <section class="screen">
       <h2>Cuéntanos de ti y tu negocio</h2>
-      <div class="field"><label for="nombre">Nombre completo</label><input id="nombre" autocomplete="name" value="${esc(S.nombre)}" placeholder="Ej. María López"></div>
-      <div class="field"><label for="tel">Teléfono</label><input id="tel" type="tel" inputmode="tel" value="${esc(S.tel)}" placeholder="Ej. 5555 1234"></div>
+      <div class="field"><label for="nombre">Nombre completo</label><input id="nombre" type="text" autocomplete="name" value="${esc(S.nombre)}" placeholder="Ej. María López"></div>
+      <div class="field"><label for="tel">Teléfono</label><input id="tel" type="tel" inputmode="tel" value="${esc(S.tel)}" placeholder="Ej. 987 654 321"></div>
       <div class="field"><label for="edad">Edad</label><input id="edad" type="number" inputmode="numeric" min="18" max="99" value="${esc(S.edad)}" placeholder="Ej. 35"></div>
       <div class="field"><span class="lbl">Género</span>${chips("genero",["Mujer","Hombre","Prefiero no decir"],S.genero)}</div>
       <div class="field"><span class="lbl">Tipo de negocio</span>${chips("negocio",["Tienda","Comida","Ropa","Servicios","Otro"],S.negocio)}</div>
       <div class="field"><span class="lbl">Tiempo con tu negocio</span>${chips("tiempo",["Menos de 1 año","1 a 3 años","3 a 5 años","Más de 5 años"],S.tiempo)}</div>
       <div class="field"><label for="ingresos">Ingresos mensuales aproximados</label>
-        <div class="money"><span>$</span><input id="ingresos" type="number" inputmode="numeric" min="0" value="${esc(S.ingresos)}" placeholder="500"></div>
+        <div class="money"><span>S/</span><input id="ingresos" type="number" inputmode="numeric" min="0" value="${esc(S.ingresos)}" placeholder="3000"></div>
         <span class="hint">Lo que vende tu negocio en un mes, más o menos</span></div>
       <div class="field"><label for="objetivo">🎯 ¿Cuánto dinero quieres conseguir?</label>
-        <div class="money"><span>$</span><input id="objetivo" type="number" inputmode="numeric" min="50" value="${esc(S.objetivo)}" placeholder="500"></div>
-        <span class="hint">Desde $50 hasta $5,000</span></div>
+        <div class="money"><span>S/</span><input id="objetivo" type="number" inputmode="numeric" min="50" value="${esc(S.objetivo)}" placeholder="3500"></div></div>
       <div class="field"><span class="lbl">💳 ¿Tienes préstamos actualmente?</span>${chips("tiene",["Sí","No"],S.tiene)}</div>
       <div class="sub" id="prest" ${S.tiene==="Sí"?"":"hidden"}>
-        <div class="field"><label for="conQuien">¿Con quién?</label><input id="conQuien" value="${esc(S.conQuien)}" placeholder="Ej. cooperativa, prestamista, familiar"></div>
-        <div class="field"><label for="debe">¿Cuánto debes?</label><div class="money"><span>$</span><input id="debe" type="number" inputmode="numeric" value="${esc(S.debe)}" placeholder="200"></div></div>
+        <div class="field"><label for="conQuien">¿Con quién?</label><input id="conQuien" type="text" value="${esc(S.conQuien)}" placeholder="Ej. caja municipal, prestamista, familiar"></div>
+        <div class="field"><label for="debe">¿Cuánto queda pendiente?</label><div class="money"><span>S/</span><input id="debe" type="number" inputmode="numeric" value="${esc(S.debe)}" placeholder="700"></div></div>
       </div>
       <p class="err" id="err" hidden></p>
     </section>
     <div class="cta"><button class="btn" id="next1">Continuar</button></div>`; },
 
-  solicitud(){ if(!S.monto) S.monto=S.objetivo; return `
+  historial(){ return `
     <button class="back" data-go="registro">← Atrás</button>
     ${steps(2)}
     <section class="screen">
-      <h2>Arma tu crédito</h2>
-      <div class="field"><label for="monto">Monto</label><div class="money"><span>$</span><input id="monto" type="number" inputmode="numeric" value="${esc(S.monto)}"></div>
-        <span class="hint">Tomamos el objetivo que nos diste. Puedes cambiarlo.</span></div>
-      <div class="field"><span class="lbl">¿Para qué lo vas a usar?</span>${chips("uso",["Inventario","Equipo","Local","Otro"],S.uso)}</div>
-      <div class="field"><span class="lbl">Plazo</span><div class="seg chips">${[3,6,12].map(m=>`<button type="button" class="chip" data-g="plazo" data-v="${m}" aria-pressed="${m===S.plazo}">${m} meses</button>`).join("")}</div></div>
-      <div class="est"><span>Cuota mensual aprox.</span><b id="est">${fmt(cuota())}</b></div>
+      <h2>Arma tu historial</h2>
+      <p>Agrega lo que ya tienes. Entre más agregues, más bancos te pueden ver.</p>
+      <div class="fuentes">${FUENTES.map(f=>{const on=S.fuentes.includes(f.id); return `
+        <button type="button" class="fuente" data-f="${f.id}" aria-pressed="${on}">
+          <span class="ico" aria-hidden="true">${f.ico}</span>
+          <span class="txt"><b>${f.t}</b><small>${f.d}</small></span>
+          <span class="est">${on?"Agregado ✓":"Agregar"}</span>
+        </button>`}).join("")}</div>
+      <p class="contador" id="cont">${S.fuentes.length} de ${FUENTES.length} agregados</p>
+      <p class="nota">Nunca te pedimos contraseñas. Solo comprobantes o tu permiso.</p>
       <p class="err" id="err" hidden></p>
     </section>
-    <div class="cta"><button class="btn" id="next2">Solicitar crédito</button></div>`; },
+    <div class="cta"><button class="btn" id="next2">Ordenar mi historial</button></div>`; },
 
-  resultado(){ const c=cuota(); return `
+  cargando(){ return `
+    <section class="screen cargando">
+      <div class="pill-anim" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <h3>Ordenando tu historial…</h3>
+      <p class="nota">Como el cajón de los cargadores, pero más rápido.</p>
+    </section>`; },
+
+  reporte(){ const n=nivel(), pend=FUENTES.filter(f=>!S.fuentes.includes(f.id)); return `
+    <button class="back" data-go="historial">← Atrás</button>
     ${steps(3)}
     <section class="screen">
-      <span class="badge">¡Aprobado!</span>
-      <h2>${esc(S.nombre.split(" ")[0]||"Listo")}, tu crédito está listo 🎉</h2>
-      <div class="big"><small>Monto aprobado</small><strong>${fmt(S.monto)}</strong><span>Depósito a tu cuenta o billetera en menos de 24 h</span></div>
-      <div class="rows">
-        <div><span>Cuota mensual</span><b>${fmt(c)}</b></div>
-        <div><span>Plazo</span><b>${S.plazo} meses</b></div>
-        <div><span>Tasa mensual</span><b>${(RATE*100).toFixed(1)}%</b></div>
-        <div><span>Total a pagar</span><b>${fmt(c*S.plazo)}</b></div>
-        <div><span>Uso</span><b>${esc(S.uso)}</b></div>
+      <h2>${nombre1()?nombre1()+", tu":"Tu"} historial, en orden</h2>
+      <div class="nivel">
+        <small>Tu avance</small>
+        <strong>${NOMBRES_NIVEL[n]}</strong>
+        <div class="escalones" aria-label="Nivel ${n} de 5">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join("")}</div>
       </div>
+      <h3>Lo que ya cuenta</h3>
+      <ul class="lista ok">
+        ${S.fuentes.map(id=>`<li><span class="dot">✓</span><span>${FUENTES.find(f=>f.id===id).t}</span></li>`).join("")}
+        ${S.tiempo&&S.tiempo!=="Menos de 1 año"?`<li><span class="dot">✓</span><span>${S.tiempo} con tu negocio</span></li>`:""}
+        ${S.tiene==="No"?`<li><span class="dot">✓</span><span>No tienes deudas pendientes</span></li>`:""}
+        ${formalPts()?`<li><span class="dot">✓</span><span>Tu negocio va camino a ser formal</span></li>`:""}
+      </ul>
+      ${pend.length||S.tiene==="Sí"||!formalPts()?`<h3>Para subir un escalón</h3>
+      <ul class="lista mejora">
+        ${pend.slice(0,2).map(f=>`<li><span class="dot">+</span><span>Agrega ${f.t.toLowerCase()}</span></li>`).join("")}
+        ${S.tiene==="Sí"?`<li><span class="dot">+</span><span>Ponte al día con lo que quedó pendiente${+S.debe?` (${fmt(S.debe)})`:""}</span></li>`:""}
+        ${!formalPts()?`<li class="link" data-formal="reporte" tabindex="0" role="button"><span class="dot">+</span><span><u>Formaliza tu negocio</u></span></li>`:""}
+      </ul>`:""}
+      <div class="cifra"><span>Podrías conseguir hasta</span><b>${fmt(Math.max(...ENTIDADES.filter(e=>n>=e.min).map(montoEnt)))}</b></div>
+      <p class="nota">Tu objetivo: ${fmt(S.objetivo)}</p>
     </section>
-    <div class="cta"><button class="btn sun" data-go="micredito">Ver mi crédito</button></div>`; },
+    <div class="cta"><button class="btn" data-go="entidades">Ver quién me puede prestar</button></div>`; },
 
-  micredito(){ const c=cuota(), total=c*S.plazo, saldo=Math.max(0,total-c*S.pagadas), pct=Math.round(S.pagadas/S.plazo*100), done=S.pagadas>=S.plazo; return `
+  entidades(){ const n=nivel(); return `
+    <button class="back" data-go="reporte">← Atrás</button>
     ${steps(4)}
     <section class="screen">
-      <h2>Mi crédito</h2>
-      <div class="big"><small>Saldo pendiente</small><strong>${fmt(saldo)}</strong>
-        <div class="bar" aria-label="Avance ${pct}%"><i style="width:${pct}%"></i></div>
-        <span>${S.pagadas} de ${S.plazo} cuotas pagadas</span></div>
-      <div class="rows">
-        <div><span>Próximo pago</span><b>${done?"—":fmt(c)}</b></div>
-        <div><span>Fecha</span><b>${done?"Crédito pagado":nextDate()}</b></div>
-        <div><span>Negocio</span><b>${esc(S.negocio||"—")}</b></div>
-      </div>
-      ${S.pagadas?`<p class="toast">${done?"¡Terminaste de pagar! Ya puedes pedir un crédito más grande.":"Pago registrado. ¡Vas muy bien!"}</p>`:""}
+      <h2>Entidades para ti</h2>
+      <p>Elige a quién enviar tu reporte. Puedes elegir varias.</p>
+      <div class="entidades">${ENTIDADES.map(e=>{
+        const ok=n>=e.min, m=montoEnt(e), c=cuota(m,e.r), on=S.elegidas.includes(e.id);
+        const tag = !ok?'<span class="tag no">Te falta un escalón</span>':(n-e.min>=2?'<span class="tag">Muy compatible</span>':'<span class="tag medio">Compatible</span>');
+        return `<button type="button" class="ent" data-e="${e.id}" aria-pressed="${on}" ${ok?"":"disabled"}>
+          <div class="ent-top"><div><b>${e.n}</b><div class="tipo">${e.tipo}</div></div>${tag}</div>
+          ${ok?`<div class="ent-num"><div><span>Te podría prestar</span><strong>${fmt(m)}</strong></div><div><span>Cuota al mes</span><strong>${fmt(c)}</strong></div></div>
+          <p class="ent-pie">En 12 meses pagarías ${fmt(c*12-m)} de más.</p>`:`<p class="ent-pie">Agrega más a tu historial para llegar aquí.</p>`}
+        </button>`}).join("")}</div>
+      <p class="nota">Entidades de ejemplo para esta demo.</p>
+      <label class="check" for="acepto"><input type="checkbox" id="acepto" ${S.acepto?"checked":""}><span>Sí, quiero enviar mi reporte a las entidades que elegí.</span></label>
     </section>
-    <div class="cta" style="display:flex;flex-direction:column;gap:10px">
-      ${done?"":`<button class="btn" id="pagar">Pagar ${fmt(c)}</button>`}
-      <button class="btn ghost" id="reiniciar">Volver a empezar</button>
+    <div class="cta"><button class="btn" id="enviar" ${S.elegidas.length&&S.acepto?"":"disabled"}>Enviar mi reporte</button></div>`; },
+
+  formalizar(){ const tot=pasosTot(), hechos=S.pasosOk.length; return `
+    <button class="back" data-go="${S.volver}">← Atrás</button>
+    <section class="screen">
+      <h2>Formaliza tu negocio</h2>
+      <p>Tener tu empresa en regla abre más puertas en los bancos. Vamos paso a paso.</p>
+      <div class="field"><span class="lbl">¿Cómo vas a tener tu negocio?</span>${chips("tipoEmp",["Solo yo","Con socios"],S.tipoEmp)}
+        <span class="hint">Solo yo = persona natural con negocio · Con socios = empresa (EIRL, SAC, SRL)</span></div>
+      ${tot?`
+      <div class="field"><span class="lbl" id="progTxt">${hechos} de ${tot} pasos listos</span><div class="barra"><i id="progBar" style="width:${hechos/tot*100}%"></i></div></div>
+      <ul class="pasos">${PASOS[S.tipoEmp].map((x,i)=>`<li><label for="paso${i}"><input type="checkbox" id="paso${i}" data-paso="${i}" ${S.pasosOk.includes(i)?"checked":""}><span class="txt"><b>${x.t}</b><small>${x.d}</small></span></label></li>`).join("")}</ul>
+      <p class="nota">Pasos de referencia para Perú. Cada paso que completes suma a tu historial.</p>
+      ${S.asesor?`<p class="aviso">Listo. Un asesor de Impulsa te escribe por WhatsApp para acompañarte.</p>`:""}`:""}
+    </section>
+    ${tot?`<div class="cta">${S.asesor?"":`<button class="btn" id="asesor">Quiero que me acompañen</button>`}<button class="btn sec" data-go="${S.volver}">Guardar y volver</button></div>`:""}`; },
+
+  empresa(){ const tot=E.clientes.length, regs=E.clientes.reduce((a,c)=>a+c.regs.length,0), aTiempo=E.clientes.reduce((a,c)=>a+c.regs.filter(r=>r.tipo==="ok").length,0); return `
+    <button class="back" data-go="inicio">← Atrás</button>
+    <section class="screen">
+      <div class="banda"><small>Panel para empresas</small><strong>Distribuidora Ejemplo</strong><span>Agrega cómo te pagan tus clientes. Así su esfuerzo también cuenta.</span></div>
+      <div class="resumen"><div><strong>${tot}</strong><span>Clientes</span></div><div><strong>${regs}</strong><span>Registros</span></div><div><strong>${aTiempo}</strong><span>Pagos a tiempo</span></div></div>
+      ${E.toast?`<p class="toast">${esc(E.toast)}</p>`:""}
+      <h3>Tus clientes</h3>
+      <div class="clientes">${E.clientes.map(c=>{const n=nivelCli(c);return `
+        <button type="button" class="cli" data-cli="${c.id}"><span class="ini">${esc(iniciales(c.nombre))}</span>
+          <span class="txt"><b>${esc(c.nombre)}</b><small>${esc(c.negocio)} · ${c.regs.length} registro${c.regs.length===1?"":"s"}</small></span>
+          <span class="mini" aria-label="Nivel ${n} de 5">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join("")}</span></button>`}).join("")}</div>
+      <p class="nota">Clientes de ejemplo para esta demo.</p>
+    </section>
+    <div class="cta"><button class="btn" data-go="empresaNuevo">Agregar cliente</button></div>`; },
+
+  empresaNuevo(){ return `
+    <button class="back" data-go="empresa">← Atrás</button>
+    <section class="screen">
+      <h2>Nuevo cliente</h2>
+      <div class="field"><label for="cNombre">Nombre del cliente</label><input id="cNombre" type="text" placeholder="Ej. Carmen Huamán"></div>
+      <div class="field"><label for="cTel">Teléfono</label><input id="cTel" type="tel" inputmode="tel" placeholder="Ej. 987 654 321"></div>
+      <div class="field"><span class="lbl">Tipo de negocio</span>${chips("cNegocio",["Tienda","Comida","Ropa","Servicios","Otro"],E.cNegocio)}</div>
+      <label class="check" for="cPermiso"><input type="checkbox" id="cPermiso"><span>Mi cliente aceptó que comparta su historial con Impulsa.</span></label>
+      <p class="err" id="err" hidden></p>
+    </section>
+    <div class="cta"><button class="btn" id="guardarCli">Guardar cliente</button></div>`; },
+
+  empresaCliente(){ const c=E.clientes.find(x=>x.id===E.sel), n=nivelCli(c), ok=c.regs.filter(r=>r.tipo==="ok").length, pagos=c.regs.filter(r=>r.tipo!=="cr").length;
+    const regs=[...c.regs].sort((a,b)=>b.fecha.localeCompare(a.fecha)); return `
+    <button class="back" data-go="empresa">← Atrás</button>
+    <section class="screen">
+      <div class="nivel"><small>${esc(c.negocio)} · ${esc(c.tel)}</small><strong>${esc(c.nombre)}</strong>
+        <div class="escalones" aria-label="Nivel ${n} de 5">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join("")}</div>
+        <span>${pagos?`${ok} de ${pagos} pagos a tiempo`:"Todavía sin pagos registrados"}</span></div>
+      ${E.toast?`<p class="toast">${esc(E.toast)}</p>`:""}
+      <div class="form-card">
+        <h3>Agregar al historial</h3>
+        <div class="field"><span class="lbl">¿Qué pasó?</span>${chips("nuevoTipo",Object.values(TIPOS_REG),TIPOS_REG[E.nuevoTipo])}</div>
+        <div class="field"><label for="rMonto">Monto</label><div class="money"><span>S/</span><input id="rMonto" type="number" inputmode="numeric" min="1" placeholder="500"></div></div>
+        <div class="field"><label for="rFecha">Fecha</label><input id="rFecha" type="date" value="${HOY.toISOString().slice(0,10)}"></div>
+        <p class="err" id="err" hidden></p>
+        <button class="btn" id="agregarReg">Agregar registro</button>
+      </div>
+      <h3>Historial</h3>
+      ${regs.length?`<ul class="regs">${regs.map(r=>`<li><span class="k ${r.tipo}"></span><span class="txt"><span>${TIPOS_REG[r.tipo]}</span><small>${fechaTxt(r.fecha)}</small></span><b>${fmt(r.monto)}</b></li>`).join("")}</ul>`:`<p class="nota">Aún no hay registros. Agrega el primero arriba.</p>`}
+    </section>`; },
+
+  seguimiento(){ const a=S.avance, el=ENTIDADES.filter(e=>S.elegidas.includes(e.id));
+    const paso=(i,t)=>`<li class="${a>i?'hecho':a===i?'ahora':'pend'}"><span class="p">${a>i?"✓":i+1}</span><span>${t}</span></li>`;
+    return `
+    ${steps(5)}
+    <section class="screen">
+      <h2>Tu reporte va en camino</h2>
+      ${a>=3?`<div class="festejo"><strong>¡Buenas noticias${nombre1()?", "+nombre1():""}! 🎉</strong><span>${el[0].n} quiere hablar contigo para tu crédito de hasta ${fmt(montoEnt(el[0]))}. Te escribimos por WhatsApp.</span></div>`:""}
+      ${el.map(e=>`<div class="seg-card"><div class="ent-top"><div><b>${e.n}</b><div class="tipo">${e.tipo}</div></div></div>
+        <ol class="linea">${paso(0,"Reporte enviado")}${paso(1,"En revisión")}${paso(2,a>=3?"Te quieren prestar":"Respuesta")}</ol></div>`).join("")}
+      <p class="nota">Tus datos solo llegaron a las entidades que elegiste.</p>
+    </section>
+    <div class="cta">
+      ${a<3?`<button class="btn" id="avanzar">Ver avance</button>`:""}
+      <button class="btn sec" id="reiniciar">Volver a empezar</button>
     </div>`; }
 };
 
-function nextDate(){ const d=new Date(); d.setMonth(d.getMonth()+1+S.pagadas); return d.toLocaleDateString("es-GT",{day:"numeric",month:"long"}); }
-
-function go(name){ $("#view").innerHTML = screens[name](); window.scrollTo(0,0); bind(name); }
-
-function showErr(msg){ const e=$("#err"); e.textContent=msg; e.hidden=false; }
+function go(name){ $("#view").innerHTML = screens[name](); window.scrollTo(0,0); bind(name); E.toast=""; }
+function showErr(msg){ const e=$("#err"); e.textContent=msg; e.hidden=false; e.scrollIntoView({block:"center",behavior:"smooth"}); }
 
 function bind(name){
   document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
   document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
-    const g=b.dataset.g, v=g==="plazo"?+b.dataset.v:b.dataset.v; S[g]=v;
+    const g=b.dataset.g;
+    if(g==="nuevoTipo"){ E.nuevoTipo=Object.keys(TIPOS_REG).find(k=>TIPOS_REG[k]===b.dataset.v); }
+    else if(g==="cNegocio"){ E.cNegocio=b.dataset.v; }
+    else if(g==="tipoEmp"){ if(S.tipoEmp!==b.dataset.v){ S.tipoEmp=b.dataset.v; S.pasosOk=[]; S.asesor=false; go("formalizar"); } return; }
+    else S[g]=b.dataset.v;
     document.querySelectorAll(`[data-g="${g}"]`).forEach(x=>x.setAttribute("aria-pressed", x===b));
-    if(g==="tiene") $("#prest").hidden = v!=="Sí";
-    if(g==="plazo") $("#est").textContent=fmt(cuota());
+    if(g==="tiene") $("#prest").hidden = S.tiene!=="Sí";
   });
-  document.querySelectorAll("input").forEach(i=>i.oninput=()=>{ S[i.id]=i.value; if(i.id==="monto") $("#est").textContent=fmt(cuota()); });
+  document.querySelectorAll("[data-formal]").forEach(b=>{ const f=()=>{ S.volver=b.dataset.formal; go("formalizar"); }; b.onclick=f; b.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); f(); } }; });
+  if(["registro"].includes(name)) document.querySelectorAll("input[id]").forEach(i=>{ if(i.type!=="checkbox") i.oninput=()=>{ S[i.id]=i.value; }; });
+  if(name!=="empresa" && name!=="empresaCliente") E.toast="";
+  if(name==="formalizar"){
+    document.querySelectorAll("[data-paso]").forEach(c=>c.onchange=()=>{
+      const i=+c.dataset.paso; S.pasosOk = c.checked ? [...new Set([...S.pasosOk,i])] : S.pasosOk.filter(x=>x!==i);
+      $("#progTxt").textContent=`${S.pasosOk.length} de ${pasosTot()} pasos listos`; $("#progBar").style.width=(S.pasosOk.length/pasosTot()*100)+"%";
+    });
+    const a=$("#asesor"); if(a) a.onclick=()=>{ S.asesor=true; go("formalizar"); };
+  }
+  if(name==="empresa"){ document.querySelectorAll("[data-cli]").forEach(b=>b.onclick=()=>{ E.sel=+b.dataset.cli; E.nuevoTipo="ok"; E.toast=""; go("empresaCliente"); }); E.toast=""; }
+  if(name==="empresaNuevo"){ E.cNegocio=""; $("#guardarCli").onclick=()=>{
+    const nom=$("#cNombre").value.trim(), tel=$("#cTel").value.trim();
+    if(!nom) return showErr("Escribe el nombre del cliente.");
+    if(!E.cNegocio) return showErr("Elige el tipo de negocio del cliente.");
+    if(!$("#cPermiso").checked) return showErr("Necesitamos el permiso de tu cliente para guardar su historial.");
+    const id=Math.max(0,...E.clientes.map(c=>c.id))+1;
+    E.clientes.unshift({id,nombre:nom,tel:tel||"Sin teléfono",negocio:E.cNegocio,regs:[]});
+    E.sel=id; E.nuevoTipo="ok"; E.toast="Cliente guardado. Agrega su primer registro."; go("empresaCliente");
+  }; }
+  if(name==="empresaCliente"){ $("#agregarReg").onclick=()=>{
+    const m=+$("#rMonto").value, f=$("#rFecha").value;
+    if(!(m>0)) return showErr("Escribe el monto.");
+    if(!f) return showErr("Elige la fecha.");
+    E.clientes.find(x=>x.id===E.sel).regs.push({tipo:E.nuevoTipo,monto:m,fecha:f});
+    E.toast=`Agregado: ${TIPOS_REG[E.nuevoTipo].toLowerCase()} por ${fmt(m)}.`; go("empresaCliente"); E.toast="";
+  }; }
+
   if(name==="registro") $("#next1").onclick=()=>{
     if(!S.nombre.trim()) return showErr("Escribe tu nombre para continuar.");
     if(!S.tel.trim()) return showErr("Escribe tu teléfono para continuar.");
-    if(!(+S.edad>=18 && +S.edad<=99)) return showErr("Escribe una edad válida (18 años o más).");
+    if(!(+S.edad>=18 && +S.edad<=99)) return showErr("Escribe tu edad (18 años o más).");
     if(!S.genero) return showErr("Elige una opción de género.");
     if(!S.negocio) return showErr("Elige el tipo de negocio.");
     if(!S.tiempo) return showErr("Cuéntanos cuánto tiempo tienes con tu negocio.");
     if(!(+S.ingresos>0)) return showErr("Escribe tus ingresos mensuales aproximados.");
-    if(!(+S.objetivo>=50)) return showErr("El objetivo debe ser de al menos $50.");
+    if(!(+S.objetivo>=100)) return showErr("Escribe cuánto dinero quieres conseguir.");
     if(!S.tiene) return showErr("Cuéntanos si tienes préstamos actualmente.");
-    S.monto=""; go("solicitud");
+    go("historial");
   };
-  if(name==="solicitud") $("#next2").onclick=()=>{
-    if(!(+S.monto>=50 && +S.monto<=5000)) return showErr("El monto debe estar entre $50 y $5,000.");
-    if(!S.uso) return showErr("Elige para qué vas a usar el crédito.");
-    go("resultado");
-  };
-  if(name==="micredito"){
-    const p=$("#pagar"); if(p) p.onclick=()=>{ S.pagadas++; go("micredito"); };
-    $("#reiniciar").onclick=()=>{ Object.assign(S,{nombre:"",tel:"",edad:"",genero:"",negocio:"",tiempo:"",ingresos:"",objetivo:"",tiene:null,conQuien:"",debe:"",monto:"",uso:"",plazo:6,pagadas:0}); go("inicio"); };
+  if(name==="historial"){
+    document.querySelectorAll(".fuente").forEach(b=>b.onclick=()=>{
+      const id=b.dataset.f, on=!S.fuentes.includes(id);
+      S.fuentes = on ? [...S.fuentes,id] : S.fuentes.filter(x=>x!==id);
+      b.setAttribute("aria-pressed",on); b.querySelector(".est").textContent = on?"Agregado ✓":"Agregar";
+      $("#cont").textContent = `${S.fuentes.length} de ${FUENTES.length} agregados`; $("#err").hidden=true;
+    });
+    $("#next2").onclick=()=>{
+      if(!S.fuentes.length) return showErr("Agrega al menos una cosa a tu historial.");
+      S.elegidas=[]; S.acepto=false; go("cargando"); setTimeout(()=>go("reporte"), 1800);
+    };
+  }
+  if(name==="entidades"){
+    const upd=()=>{ $("#enviar").disabled = !(S.elegidas.length && S.acepto); };
+    document.querySelectorAll(".ent:not([disabled])").forEach(b=>b.onclick=()=>{
+      const id=b.dataset.e, on=!S.elegidas.includes(id);
+      S.elegidas = on ? [...S.elegidas,id] : S.elegidas.filter(x=>x!==id);
+      b.setAttribute("aria-pressed",on); upd();
+    });
+    $("#acepto").onchange=e=>{ S.acepto=e.target.checked; upd(); };
+    $("#enviar").onclick=()=>{ S.avance=1; go("seguimiento"); };
+  }
+  if(name==="seguimiento"){
+    const av=$("#avanzar"); if(av) av.onclick=()=>{ S.avance++; go("seguimiento"); };
+    $("#reiniciar").onclick=()=>{ S=VACIO(); go("inicio"); };
   }
 }
 go("inicio");
